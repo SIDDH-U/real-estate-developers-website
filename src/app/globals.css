@@ -1,0 +1,381 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F7F3EC;
+  --foreground: #1F2326;
+  --color-sand: #F7F3EC;
+  --color-sand-alt: #FBF8F2;
+  --color-sand-muted: #EFE8DC;
+  --color-charcoal: #1F2326;
+  --color-charcoal-light: #2D3337;
+  --color-charcoal-dark: #141719;
+  --color-forest: #1F3D2F;
+  --color-forest-dark: #152B21;
+  --color-forest-light: #2A513F;
+  --color-bronze: #B08A4E;
+  --color-bronze-dark: #93713D;
+  --color-bronze-light: #C9A66B;
+  --color-bronze-tint: #F5EFE6;
+
+  /* Global Easing Rule: cubic-bezier(0.22, 1, 0.36, 1) */
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-sand: #F7F3EC;
+  --color-sand-alt: #FBF8F2;
+  --color-sand-muted: #EFE8DC;
+  --color-charcoal: #1F2326;
+  --color-charcoal-light: #2D3337;
+  --color-charcoal-dark: #141719;
+  --color-forest: #1F3D2F;
+  --color-forest-dark: #152B21;
+  --color-forest-light: #2A513F;
+  --color-bronze: #B08A4E;
+  --color-bronze-dark: #93713D;
+  --color-bronze-light: #C9A66B;
+  --color-bronze-tint: #F5EFE6;
+  --font-serif: var(--font-playfair), "Georgia", "Times New Roman", serif;
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: #F7F3EC;
+  color: #1F2326;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background-color: #F7F3EC;
+  color: #1F2326;
+  overflow-x: hidden;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Base interactive transitions */
+button, a {
+  transition-timing-function: var(--ease-luxury);
+}
+
+/* Dark Glassmorphism for Hero Spotlight Card */
+.glass-dark {
+  background: rgba(20, 28, 24, 0.52);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.45);
+}
+
+/* Primary Bronze Button Sheen (Moving Overlay Only) */
+@keyframes buttonSheenOnce {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.btn-bronze {
+  position: relative;
+  background-color: #B08A4E;
+  color: #FFFFFF;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease-luxury), box-shadow 0.25s var(--ease-luxury), background-color 0.25s var(--ease-luxury);
+}
+
+.btn-bronze::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-bronze:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(176, 138, 78, 0.4);
+  background-color: #A37E43;
+}
+
+.btn-bronze:hover::after {
+  animation: buttonSheenOnce 0.75s var(--ease-luxury) forwards;
+}
+
+.btn-bronze:active {
+  transform: scale(0.97);
+}
+
+/* Secondary Outline Button with Fill Wipe from Left */
+.btn-secondary {
+  position: relative;
+  background-color: transparent;
+  color: #F7F3EC;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+  z-index: 1;
+  transition: border-color 0.3s var(--ease-luxury), transform 0.2s var(--ease-luxury);
+}
+
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.16);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-luxury);
+  z-index: -1;
+}
+
+.btn-secondary:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Ambient Pulse Rings (WhatsApp ~7s, Play Ring ~5s, Sticky Sheen ~9s) */
+@keyframes ringPulse {
+  0%, 80%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(31, 61, 47, 0.4);
+  }
+  88% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 6px rgba(31, 61, 47, 0);
+  }
+}
+
+.pulse-whatsapp {
+  animation: ringPulse 7s infinite ease-out;
+}
+
+@keyframes playPulseRing {
+  0%, 75%, 100% {
+    box-shadow: 0 0 0 0 rgba(176, 138, 78, 0.5);
+  }
+  85% {
+    box-shadow: 0 0 0 8px rgba(176, 138, 78, 0);
+  }
+}
+
+.pulse-play {
+  animation: playPulseRing 5s infinite ease-out;
+}
+
+@keyframes periodicSheen {
+  0%, 80%, 100% {
+    transform: translateX(-150%) skewX(-20deg);
+    opacity: 0;
+  }
+  86% {
+    opacity: 0.6;
+  }
+  92% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.sheen-periodic::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: periodicSheen 9s infinite var(--ease-luxury);
+  pointer-events: none;
+}
+
+/* Ambient Drifting Glows (30s-45s Transform Only) */
+@keyframes driftGlow1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(35px, -25px) scale(1.08);
+  }
+}
+
+@keyframes driftGlow2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 20px) scale(1.06);
+  }
+}
+
+.glow-drift-1 {
+  animation: driftGlow1 36s infinite ease-in-out;
+  will-change: transform;
+}
+
+.glow-drift-2 {
+  animation: driftGlow2 42s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Slow Ken Burns (24s) */
+@keyframes kenBurnsSlow {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsSlow 24s ease-out infinite alternate;
+  transform-origin: center 65%;
+  will-change: transform;
+}
+
+/* Static Noise Grain Overlay (2-3%) */
+.bg-grain {
+  background-image: radial-gradient(rgba(31, 35, 38, 0.04) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* Hairline Section Divider */
+.hairline-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(176, 138, 78, 0.4) 30%,
+    rgba(176, 138, 78, 0.6) 50%,
+    rgba(176, 138, 78, 0.4) 70%,
+    transparent 100%
+  );
+}
+
+/* Tabular Numerals for Count-ups */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hero Ticker Continuous Marquee (Pure CSS, 50s linear infinite) */
+@keyframes ticker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ticker-wrap {
+  position: relative;
+  width: 100%;
+  height: 2.5rem; /* 40px */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 50s linear infinite;
+  will-change: transform;
+}
+
+.ticker-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+@media (hover: hover) {
+  .ticker-wrap:hover .ticker-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Facade Diagonal Light Sweep (~12s loop, transform only) */
+@keyframes facadeLightSweep {
+  0%, 75%, 100% {
+    transform: translateX(-160%) skewX(-25deg);
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.12;
+  }
+  90% {
+    transform: translateX(260%) skewX(-25deg);
+    opacity: 0;
+  }
+}
+
+.facade-light-sweep {
+  animation: facadeLightSweep 12s infinite ease-in-out;
+  will-change: transform;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Respect prefers-reduced-motion: replace all motion with simple fades or none */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ticker-track {
+    animation: none !important;
+    transform: none !important;
+  }
+  .animate-ken-burns,
+  .facade-light-sweep,
+  .glow-drift-1,
+  .glow-drift-2,
+  .pulse-whatsapp,
+  .pulse-play,
+  .sheen-periodic::after,
+  .btn-bronze:hover::after {
+    animation: none !important;
+  }
+}

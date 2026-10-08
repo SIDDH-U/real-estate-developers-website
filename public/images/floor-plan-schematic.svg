@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="100%" height="100%">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E6E0D4" stroke-width="0.8" opacity="0.6"/>
+    </pattern>
+    <linearGradient id="wallGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D3337" />
+      <stop offset="100%" stop-color="#1F2326" />
+    </linearGradient>
+    <linearGradient id="bronzeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C9A66B" />
+      <stop offset="100%" stop-color="#B08A4E" />
+    </linearGradient>
+  </defs>
+
+  <!-- Architectural Parchment Paper Background -->
+  <rect width="1000" height="700" fill="#FAF6EE" />
+  <rect width="1000" height="700" fill="url(#grid)" />
+
+  <!-- Outer Architectural Border -->
+  <rect x="25" y="25" width="950" height="650" fill="none" stroke="#C2B7A3" stroke-width="1.5" stroke-dasharray="6,4" />
+  <rect x="35" y="35" width="930" height="630" fill="none" stroke="#8C816E" stroke-width="0.75" />
+
+  <!-- Header Title Block -->
+  <text x="60" y="70" font-family="'Times New Roman', serif" font-size="20" font-weight="bold" fill="#1F2326" letter-spacing="1">GREENVIEW HEIGHTS • TYPICAL 3 BHK RESIDENCE</text>
+  <text x="60" y="92" font-family="sans-serif" font-size="12" fill="#716B5E" letter-spacing="0.5">SUPER BUILT-UP: 1,350 SQ. FT. | CARPET AREA: 1,040 SQ. FT. | RERA APPROVED</text>
+
+  <!-- Scale & North Indicator -->
+  <g transform="translate(880, 75)">
+    <circle cx="0" cy="0" r="22" fill="#FAF6EE" stroke="#B08A4E" stroke-width="1.5" />
+    <path d="M 0 -18 L 6 0 L 0 -4 L -6 0 Z" fill="#B08A4E" />
+    <path d="M 0 18 L 6 0 L 0 4 L -6 0 Z" fill="#D8C8B0" />
+    <text x="-4" y="-22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1F2326">N</text>
+  </g>
+
+  <!-- APARTMENT ROOMS & WALLS -->
+  
+  <!-- LIVING & DINING ROOM (Central Grand Hall) -->
+  <rect x="300" y="160" width="380" height="260" fill="#F4EFE6" stroke="#1F2326" stroke-width="6" rx="2" />
+  <!-- Flooring Parquet lines -->
+  <line x1="310" y1="210" x2="670" y2="210" stroke="#E2DAC9" stroke-width="1" stroke-dasharray="8,4" />
+  <line x1="310" y1="270" x2="670" y2="270" stroke="#E2DAC9" stroke-width="1" stroke-dasharray="8,4" />
+  <line x1="310" y1="330" x2="670" y2="330" stroke="#E2DAC9" stroke-width="1" stroke-dasharray="8,4" />
+  <line x1="310" y1="390" x2="670" y2="390" stroke="#E2DAC9" stroke-width="1" stroke-dasharray="8,4" />
+
+  <!-- Furniture: Sofa Set & Coffee Table -->
+  <rect x="340" y="190" width="130" height="60" rx="8" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <rect x="340" y="270" width="80" height="40" rx="4" fill="#EAE3D5" stroke="#716B5E" stroke-width="1.2" />
+  <rect x="440" y="260" width="40" height="60" rx="6" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <!-- Dining Table with 6 Chairs -->
+  <rect x="540" y="220" width="100" height="60" rx="6" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <circle cx="560" cy="205" r="7" fill="#C4B8A2" />
+  <circle cx="590" cy="205" r="7" fill="#C4B8A2" />
+  <circle cx="620" cy="205" r="7" fill="#C4B8A2" />
+  <circle cx="560" cy="295" r="7" fill="#C4B8A2" />
+  <circle cx="590" cy="295" r="7" fill="#C4B8A2" />
+  <circle cx="620" cy="295" r="7" fill="#C4B8A2" />
+
+  <text x="490" y="345" text-anchor="middle" font-family="'Times New Roman', serif" font-size="15" font-weight="bold" fill="#1F2326">LIVING &amp; DINING</text>
+  <text x="490" y="365" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#716B5E">14&apos;0&quot; x 22&apos;6&quot; (4.25m x 6.85m)</text>
+
+  <!-- SUNDECK BALCONY (Attached to Living) -->
+  <rect x="300" y="120" width="220" height="40" fill="#E8DFD0" stroke="#1F2326" stroke-width="4" />
+  <line x1="300" y1="120" x2="520" y2="120" stroke="#B08A4E" stroke-width="3" stroke-dasharray="4,4" />
+  <text x="410" y="145" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1F2326">SUNSET BALCONY 15&apos; x 5&apos;</text>
+
+  <!-- MASTER BEDROOM SUITE (Right Side) -->
+  <rect x="680" y="160" width="230" height="240" fill="#F4EFE6" stroke="#1F2326" stroke-width="6" rx="2" />
+  <!-- King Size Bed with Pillows -->
+  <rect x="730" y="180" width="130" height="110" rx="4" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <rect x="745" y="190" width="45" height="25" rx="3" fill="#FAF6EE" stroke="#A89E8D" stroke-width="1" />
+  <rect x="800" y="190" width="45" height="25" rx="3" fill="#FAF6EE" stroke="#A89E8D" stroke-width="1" />
+  <!-- Side Tables -->
+  <rect x="705" y="190" width="20" height="25" rx="2" fill="#C4B8A2" />
+  <rect x="865" y="190" width="20" height="25" rx="2" fill="#C4B8A2" />
+  <!-- Wardrobe -->
+  <rect x="730" y="360" width="160" height="30" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.2" stroke-dasharray="20,2" />
+
+  <text x="795" y="320" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" font-weight="bold" fill="#1F2326">MASTER BEDROOM</text>
+  <text x="795" y="338" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#716B5E">12&apos;0&quot; x 15&apos;0&quot;</text>
+
+  <!-- MASTER ENSUITE BATHROOM -->
+  <rect x="680" y="400" width="130" height="150" fill="#EAE3D5" stroke="#1F2326" stroke-width="6" rx="2" />
+  <circle cx="720" cy="450" r="14" fill="#FAF6EE" stroke="#716B5E" stroke-width="1.2" />
+  <rect x="760" y="430" width="35" height="50" rx="4" fill="#FAF6EE" stroke="#716B5E" stroke-width="1.2" />
+  <text x="745" y="520" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1F2326">ENSUITE BATH</text>
+
+  <!-- BEDROOM 2 (Left Top) -->
+  <rect x="80" y="160" width="220" height="210" fill="#F4EFE6" stroke="#1F2326" stroke-width="6" rx="2" />
+  <!-- Queen Bed -->
+  <rect x="120" y="180" width="110" height="100" rx="4" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <rect x="135" y="190" width="35" height="20" rx="2" fill="#FAF6EE" stroke="#A89E8D" stroke-width="1" />
+  <rect x="180" y="190" width="35" height="20" rx="2" fill="#FAF6EE" stroke="#A89E8D" stroke-width="1" />
+  <text x="190" y="310" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" font-weight="bold" fill="#1F2326">BEDROOM 2</text>
+  <text x="190" y="330" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#716B5E">11&apos;0&quot; x 13&apos;0&quot;</text>
+
+  <!-- BEDROOM 3 / STUDY (Left Bottom) -->
+  <rect x="80" y="370" width="220" height="220" fill="#F4EFE6" stroke="#1F2326" stroke-width="6" rx="2" />
+  <rect x="110" y="440" width="100" height="90" rx="4" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <text x="190" y="415" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" font-weight="bold" fill="#1F2326">BEDROOM 3</text>
+  <text x="190" y="435" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#716B5E">10&apos;6&quot; x 12&apos;0&quot;</text>
+
+  <!-- GOURMET KITCHEN & UTILITY (Bottom Center) -->
+  <rect x="300" y="420" width="210" height="170" fill="#F4EFE6" stroke="#1F2326" stroke-width="6" rx="2" />
+  <!-- L-shaped Granite Platform Counter -->
+  <path d="M 310 430 L 490 430 L 490 480 L 360 480 L 360 570 L 310 570 Z" fill="#D5CBB9" stroke="#716B5E" stroke-width="1.5" />
+  <!-- Cooking Hob -->
+  <circle cx="430" cy="455" r="6" fill="#1F2326" />
+  <circle cx="455" cy="455" r="6" fill="#1F2326" />
+  <!-- Sink -->
+  <rect x="320" y="500" width="25" height="40" rx="2" fill="#FAF6EE" stroke="#716B5E" stroke-width="1.2" />
+  <text x="430" y="525" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" font-weight="bold" fill="#1F2326">KITCHEN</text>
+  <text x="430" y="545" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#716B5E">9&apos;6&quot; x 12&apos;0&quot;</text>
+
+  <!-- COMMON BATHROOM & POWDER ROOM -->
+  <rect x="510" y="420" width="170" height="170" fill="#EAE3D5" stroke="#1F2326" stroke-width="6" rx="2" />
+  <rect x="540" y="450" width="30" height="40" rx="4" fill="#FAF6EE" stroke="#716B5E" stroke-width="1.2" />
+  <circle cx="630" cy="470" r="12" fill="#FAF6EE" stroke="#716B5E" stroke-width="1.2" />
+  <text x="595" y="535" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1F2326">COMMON BATH</text>
+  <text x="595" y="555" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#716B5E">7&apos;0&quot; x 5&apos;0&quot;</text>
+
+  <!-- ENTRANCE FOYER & SAFETY DOOR -->
+  <g transform="translate(680, 550)">
+    <rect x="0" y="0" width="130" height="40" fill="#F4EFE6" stroke="#1F2326" stroke-width="4" />
+    <path d="M 30 40 A 30 30 0 0 0 60 10" fill="none" stroke="#B08A4E" stroke-width="2" stroke-dasharray="3,3" />
+    <line x1="30" y1="40" x2="30" y2="10" stroke="#1F2326" stroke-width="3" />
+    <text x="75" y="25" font-family="sans-serif" font-size="10" font-weight="bold" fill="#B08A4E">MAIN ENTRY</text>
+  </g>
+
+  <!-- DIMENSION LINES & TICK MARKS -->
+  <!-- Width dimension line top -->
+  <line x1="80" y1="140" x2="910" y2="140" stroke="#8C816E" stroke-width="1" />
+  <line x1="80" y1="135" x2="80" y2="145" stroke="#8C816E" stroke-width="1" />
+  <line x1="910" y1="135" x2="910" y2="145" stroke="#8C816E" stroke-width="1" />
+  <rect x="460" y="132" width="80" height="16" fill="#FAF6EE" />
+  <text x="500" y="144" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#8C816E">42&apos; 0&quot; TOTAL</text>
+
+  <!-- Architectural Stamp & Watermark -->
+  <g transform="translate(820, 580)">
+    <rect x="0" y="0" width="115" height="55" fill="#FAF6EE" stroke="#B08A4E" stroke-width="1.5" />
+    <text x="57" y="20" text-anchor="middle" font-family="'Times New Roman', serif" font-size="10" font-weight="bold" fill="#B08A4E">GLORIOUS REALTY</text>
+    <text x="57" y="34" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#1F2326">ARCHITECT APPROVED</text>
+    <text x="57" y="46" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#716B5E">MAHA-RERA VERIFIED</text>
+  </g>
+</svg>

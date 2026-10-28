@@ -17,8 +17,11 @@ import {
 import { siteConfig } from "@/config/site";
 import { projectsData } from "@/data/projects";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { useDemo } from "@/context/DemoContext";
+import BrandWordmark from "@/components/common/BrandWordmark";
 
 export default function Footer() {
+  const demo = useDemo();
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   const toggleAccordion = (key: string) => {
@@ -48,56 +51,63 @@ export default function Footer() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-4 flex flex-col gap-4"
           >
-            <Link href="/" className="inline-block relative w-44 sm:w-48 h-10 sm:h-12">
-              <Image
-                src="/images/logo-white.svg"
-                alt={siteConfig.name}
-                fill
-                className="object-contain object-left"
-              />
+            <Link href={demo.appendQuery("/")} className="inline-block">
+              <BrandWordmark isWhite={true} />
             </Link>
 
             <p className="text-xs sm:text-sm text-[#A89E8D] leading-relaxed max-w-sm">
-              Building premium residential and commercial spaces with trust, quality, and a vision for a better tomorrow across Nanded, Maharashtra.
+              Building premium residential and commercial spaces with trust, quality, and a vision for a better tomorrow across{" "}
+              <span suppressHydrationWarning>{demo.city}</span>.
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center gap-2.5 pt-1">
+            <div className="flex flex-col gap-2 pt-1">
+              <div className="flex items-center gap-2.5">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
+                >
+                  <span className="text-xs font-bold">f</span>
+                </a>
+                <a
+                  href={demo.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
+                >
+                  <span className="text-xs font-bold">ig</span>
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
+                >
+                  <span className="text-xs font-bold">yt</span>
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
+                >
+                  <span className="text-xs font-bold">in</span>
+                </a>
+              </div>
               <a
-                href={siteConfig.socialLinks.facebook}
+                href={demo.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
+                className="text-xs text-[#A89E8D] hover:text-white transition-colors"
+                suppressHydrationWarning
               >
-                <span className="text-xs font-bold">f</span>
-              </a>
-              <a
-                href={siteConfig.socialLinks.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
-              >
-                <span className="text-xs font-bold">ig</span>
-              </a>
-              <a
-                href={siteConfig.socialLinks.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
-              >
-                <span className="text-xs font-bold">yt</span>
-              </a>
-              <a
-                href={siteConfig.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#D8CEBD] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all"
-              >
-                <span className="text-xs font-bold">in</span>
+                {demo.instagramHandle}
               </a>
             </div>
 
@@ -215,8 +225,8 @@ export default function Footer() {
                   </li>
                 ))}
                 <li>
-                  <Link href="/projects" className="text-xs text-[#B08A4E] hover:underline flex items-center gap-1 mt-1">
-                    <span>View All Projects in Nanded</span>
+                  <Link href={demo.appendQuery("/projects")} className="text-xs text-[#B08A4E] hover:underline flex items-center gap-1 mt-1">
+                    <span>View All Projects in <span suppressHydrationWarning>{demo.city}</span></span>
                     <ExternalLink className="w-3 h-3" />
                   </Link>
                 </li>
@@ -265,25 +275,26 @@ export default function Footer() {
             <div className="flex flex-col gap-2 text-xs text-[#D8CEBD]">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#B08A4E] flex-shrink-0 mt-0.5" />
-                <span>{siteConfig.address.formatted}</span>
+                <span suppressHydrationWarning>Pawdewadi, {demo.city}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#B08A4E] flex-shrink-0" />
                 <a
-                  href={`tel:${siteConfig.contact.phoneTel}`}
+                  href={`tel:${demo.phoneTel}`}
                   onClick={handleCall}
                   className="hover:text-white transition-colors font-medium"
+                  suppressHydrationWarning
                 >
-                  {siteConfig.contact.phoneDisplay}
+                  {demo.phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#B08A4E] flex-shrink-0" />
                 <a
-                  href={`mailto:${siteConfig.contact.email}`}
+                  href={`mailto:${demo.email}`}
                   className="hover:text-white transition-colors"
                 >
-                  {siteConfig.contact.email}
+                  {demo.email}
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -295,7 +306,7 @@ export default function Footer() {
             {/* Map Link / Thumbnail (ALWAYS VISIBLE) */}
             <div className="mt-1 rounded-xl overflow-hidden border border-white/15 bg-white/5 relative group">
               <a
-                href={siteConfig.address.googleMapsLink}
+                href={demo.mapsSearchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block relative h-16 w-full"
@@ -317,20 +328,20 @@ export default function Footer() {
         {/* Bottom Legal Bar */}
         <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C816E]">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-center sm:text-left">
-            <span>{siteConfig.legal.copyright}</span>
+            <span suppressHydrationWarning>© 2026 {demo.name}. All rights reserved.</span>
             <span className="hidden sm:inline">•</span>
-            <Link href="/privacy" className="hover:text-[#D8CEBD] transition-colors">
+            <Link href={demo.appendQuery("/privacy")} className="hover:text-[#D8CEBD] transition-colors">
               Privacy Policy
             </Link>
             <span className="hidden sm:inline">•</span>
-            <Link href="/terms" className="hover:text-[#D8CEBD] transition-colors">
+            <Link href={demo.appendQuery("/terms")} className="hover:text-[#D8CEBD] transition-colors">
               Terms &amp; Conditions
             </Link>
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] text-[#A89E8D]">
-              Nanded, Maharashtra
+            <span className="text-[11px] text-[#A89E8D]" suppressHydrationWarning>
+              {demo.city}
             </span>
             <button
               onClick={scrollToTop}

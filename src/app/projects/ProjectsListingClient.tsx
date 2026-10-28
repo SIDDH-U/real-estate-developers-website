@@ -16,10 +16,13 @@ import {
 import { projectsData } from "@/data/projects";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { useDemo } from "@/context/DemoContext";
+import AppLink from "@/components/common/AppLink";
 
 export default function ProjectsListingClient() {
   const [activeFilter, setActiveFilter] = useState("All");
   const { openLeadModal } = useLeadModal();
+  const demo = useDemo();
 
   const filterOptions = ["All", "Residential", "Villas", "Commercial", "Plots"];
   const easeLuxury = [0.22, 1, 0.36, 1] as const;
@@ -39,16 +42,16 @@ export default function ProjectsListingClient() {
       {/* 1. Header & Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <nav className="flex items-center gap-2 text-xs text-[#716B5E] mb-6">
-          <Link href="/" className="hover:text-[#1F2326]">
+          <AppLink href="/" className="hover:text-[#1F2326]">
             Home
-          </Link>
+          </AppLink>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[#1F2326] font-semibold">All Projects</span>
         </nav>
 
         <div className="max-w-3xl mb-8">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#B08A4E] block mb-2">
-            OUR DEVELOPMENTS IN NANDED
+            OUR DEVELOPMENTS IN <span data-demo-city suppressHydrationWarning>{demo.city.toUpperCase()}</span>
           </span>
           <h1 className="text-4xl sm:text-5xl font-serif font-bold text-[#1F2326]">
             Explore All Landmark Projects
@@ -134,7 +137,7 @@ export default function ProjectsListingClient() {
                       {/* Location Pin */}
                       <div className="absolute bottom-3 left-3.5 z-10 flex items-center gap-1 text-white text-xs font-medium drop-shadow-sm">
                         <MapPin className="w-3.5 h-3.5 text-[#C9A66B]" />
-                        <span>{project.location.area}, {project.location.city}</span>
+                        <span>{project.location.area}, <span data-demo-city suppressHydrationWarning>{demo.city}</span></span>
                       </div>
                     </div>
 
@@ -178,13 +181,13 @@ export default function ProjectsListingClient() {
 
                   {/* Actions Row */}
                   <div className="p-6 pt-0 flex items-center gap-2">
-                    <Link
+                    <AppLink
                       href={`/projects/${project.slug}#floor-plans`}
                       className="flex-1 py-3 px-3 rounded-xl bg-[#FAF6EE] hover:bg-[#F2ECE1] text-[#1F2326] text-xs font-semibold text-center border border-[#E5DFD5] transition-all flex items-center justify-center gap-1"
                     >
                       <span>Explore Floor Plans &amp; Specs</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </Link>
+                    </AppLink>
 
                     <button
                       type="button"
@@ -195,7 +198,7 @@ export default function ProjectsListingClient() {
                           source: "projects_listing",
                         })
                       }
-                      className="py-3 px-4 rounded-xl bg-[#B08A4E] hover:bg-[#96743D] text-white text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-xs"
+                      className="btn-bronze py-3 px-4 rounded-xl text-xs font-semibold transition-all active:scale-95 cursor-pointer shadow-xs"
                     >
                       Book Visit
                     </button>

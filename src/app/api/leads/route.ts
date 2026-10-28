@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import fs from "fs";
 import path from "path";
+import { siteConfig } from "@/config/site";
 
 // Rate limiting in-memory store: 5 submissions per IP per 10 minutes
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -147,7 +148,7 @@ export async function POST(req: NextRequest) {
       consent: {
         agreed: true,
         statement:
-          "I authorize Glorious Real Estates & its representatives to contact me via Call, SMS, WhatsApp & Email regarding properties & project updates.",
+          `I authorize ${siteConfig.name} & its representatives to contact me via Call, SMS, WhatsApp & Email regarding properties & project updates.`,
         timestamp: createdAtIST,
       },
     };
@@ -218,7 +219,7 @@ export async function POST(req: NextRequest) {
         <h2>New Lead Received: ${payload.intent.toUpperCase()}</h2>
         <p><strong>Ref:</strong> ${payload.ref}</p>
         <p><strong>Name:</strong> ${payload.name}</p>
-        <p><strong>Phone:</strong> <a href="tel:+91${payload.phone}">+91 ${payload.phone}</a> | <a href="https://wa.me/91${payload.phone}?text=Hello%20${encodeURIComponent(payload.name)},%20thank%20you%20for%20contacting%20Glorious%20Real%20Estates.">WhatsApp Chat</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+91${payload.phone}">+91 ${payload.phone}</a> | <a href="https://wa.me/91${payload.phone}?text=Hello%20${encodeURIComponent(payload.name)},%20thank%20you%20for%20contacting%20${encodeURIComponent(siteConfig.name)}.">WhatsApp Chat</a></p>
         <p><strong>Project:</strong> ${payload.project}</p>
         ${payload.date ? `<p><strong>Preferred Date:</strong> ${payload.date} (${payload.slot})</p>` : ""}
         ${payload.mode ? `<p><strong>Mode:</strong> ${payload.mode}</p>` : ""}
@@ -236,7 +237,7 @@ export async function POST(req: NextRequest) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "Glorious Leads <onboarding@resend.dev>",
+            from: `${siteConfig.name} Leads <onboarding@resend.dev>`,
             to: notifyEmail,
             subject: `New [${payload.intent}] lead - ${payload.name} - ${payload.project}`,
             html: emailHtml,
@@ -249,7 +250,7 @@ export async function POST(req: NextRequest) {
     const tgToken = process.env.TELEGRAM_BOT_TOKEN;
     const tgChatId = process.env.TELEGRAM_CHAT_ID;
     if (tgToken && tgChatId) {
-      const tgMsg = `🏢 *New Glorious Lead*\n*Ref:* ${payload.ref}\n*Type:* ${payload.intent}\n*Name:* ${payload.name}\n*Phone:* +91 ${payload.phone}\n*Project:* ${payload.project}\n${payload.date ? `*Date:* ${payload.date} ${payload.slot}\n` : ""}${payload.loanRange ? `*Loan:* ${payload.loanRange}\n` : ""}`;
+      const tgMsg = `🏢 *New ${siteConfig.name} Lead*\n*Ref:* ${payload.ref}\n*Type:* ${payload.intent}\n*Name:* ${payload.name}\n*Phone:* +91 ${payload.phone}\n*Project:* ${payload.project}\n${payload.date ? `*Date:* ${payload.date} ${payload.slot}\n` : ""}${payload.loanRange ? `*Loan:* ${payload.loanRange}\n` : ""}`;
       promises.push(
         fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
           method: "POST",
@@ -296,7 +297,7 @@ export async function POST(req: NextRequest) {
       ref,
       intent: payload.intent,
       nextStep: nextSteps[payload.intent] || "Our team will connect with you promptly.",
-      whatsappPrefilledText: `Hi Glorious Real Estates, I submitted an inquiry for ${payload.project} (Ref: ${ref}).`,
+      whatsappPrefilledText: `Hi ${siteConfig.name}, I submitted an inquiry for ${payload.project} (Ref: ${ref}).`,
     });
   } catch (error) {
     console.error("Lead submission error:", error);

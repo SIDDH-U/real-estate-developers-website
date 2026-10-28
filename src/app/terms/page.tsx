@@ -1,11 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import AppLink from "@/components/common/AppLink";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | Glorious Real Estates",
-  description: "Terms and conditions for Glorious Real Estates website, bookings and offers.",
+  title: `Terms & Conditions | ${siteConfig.name}`,
+  description: `Terms and conditions for ${siteConfig.name} website, bookings and offers.`,
 };
 
 export default function TermsPage() {
@@ -24,7 +24,7 @@ export default function TermsPage() {
       </p>
       <div className="prose prose-stone text-sm text-[#716B5E] space-y-4 leading-relaxed">
         <p>
-          Welcome to the official website of {siteConfig.name}. By accessing or using our website, you agree to comply with the terms and statutory disclaimers outlined herein.
+          Welcome to the official website of <span data-demo-name suppressHydrationWarning>{siteConfig.name}</span>. By accessing or using our website, you agree to comply with the terms and statutory disclaimers outlined herein.
         </p>
         <h2 className="text-xl font-serif font-bold text-[#1F2326] pt-4">1. Pricing &amp; Offers</h2>
         <p>
@@ -39,9 +39,9 @@ export default function TermsPage() {
           Architectural floor plans, 3D renderings, and walkthrough simulations are artistic impressions for representational purposes and may vary slightly in the final executed building.
         </p>
         <div className="pt-6">
-          <Link href="/" className="text-[#B08A4E] font-semibold hover:underline">
+          <AppLink href="/" className="text-[#B08A4E] font-semibold hover:underline">
             ← Return to Homepage
-          </Link>
+          </AppLink>
         </div>
       </div>
     </div>

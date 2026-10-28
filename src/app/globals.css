@@ -16,6 +16,8 @@
   --color-bronze-dark: #93713D;
   --color-bronze-light: #C9A66B;
   --color-bronze-tint: #F5EFE6;
+  --color-bronze-contrast: #FFFFFF;
+  --demo-h: 38px;
 
   /* Global Easing Rule: cubic-bezier(0.22, 1, 0.36, 1) */
   --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
@@ -31,10 +33,11 @@
   --color-forest: #1F3D2F;
   --color-forest-dark: #152B21;
   --color-forest-light: #2A513F;
-  --color-bronze: #B08A4E;
-  --color-bronze-dark: #93713D;
-  --color-bronze-light: #C9A66B;
-  --color-bronze-tint: #F5EFE6;
+  --color-bronze: var(--color-bronze);
+  --color-bronze-dark: var(--color-bronze-dark);
+  --color-bronze-light: var(--color-bronze-light);
+  --color-bronze-tint: var(--color-bronze-tint);
+  --color-bronze-contrast: var(--color-bronze-contrast);
   --font-serif: var(--font-playfair), "Georgia", "Times New Roman", serif;
   --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
 }
@@ -88,8 +91,8 @@ button, a {
 
 .btn-bronze {
   position: relative;
-  background-color: #B08A4E;
-  color: #FFFFFF;
+  background-color: var(--color-bronze, #B08A4E);
+  color: var(--color-bronze-contrast, #FFFFFF);
   overflow: hidden;
   transition: transform 0.25s var(--ease-luxury), box-shadow 0.25s var(--ease-luxury), background-color 0.25s var(--ease-luxury);
 }
@@ -114,7 +117,7 @@ button, a {
 .btn-bronze:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px -6px rgba(176, 138, 78, 0.4);
-  background-color: #A37E43;
+  background-color: var(--color-bronze-dark, #A37E43);
 }
 
 .btn-bronze:hover::after {
@@ -123,6 +126,36 @@ button, a {
 
 .btn-bronze:active {
   transform: scale(0.97);
+}
+
+/* Dynamic Accent Variable Overrides for buttons, highlights, glows and strokes */
+.bg-bronze,
+[class*="bg-[#B08A4E]"] {
+  background-color: var(--color-bronze, #B08A4E) !important;
+}
+.text-bronze,
+[class*="text-[#B08A4E]"] {
+  color: var(--color-bronze, #B08A4E) !important;
+}
+.border-bronze,
+[class*="border-[#B08A4E]"] {
+  border-color: var(--color-bronze, #B08A4E) !important;
+}
+.fill-bronze,
+[class*="fill-[#B08A4E]"] {
+  fill: var(--color-bronze, #B08A4E) !important;
+}
+.stroke-bronze,
+[class*="stroke-[#B08A4E]"] {
+  stroke: var(--color-bronze, #B08A4E) !important;
+}
+.accent-bronze,
+[class*="accent-[#B08A4E]"] {
+  accent-color: var(--color-bronze, #B08A4E) !important;
+}
+.ring-bronze,
+[class*="ring-[#B08A4E]"] {
+  --tw-ring-color: var(--color-bronze, #B08A4E) !important;
 }
 
 /* Secondary Outline Button with Fill Wipe from Left */

@@ -24,8 +24,11 @@ import { Project } from "@/data/projects";
 import { siteConfig } from "@/config/site";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { useDemo } from "@/context/DemoContext";
+import AppLink from "@/components/common/AppLink";
 
 export default function ProjectDetailClient({ project }: { project: Project }) {
+  const demo = useDemo();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeFloorPlanIndex, setActiveFloorPlanIndex] = useState(0);
   const [isFloorPlanZoomOpen, setIsFloorPlanZoomOpen] = useState(false);
@@ -53,9 +56,9 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
   const handleWhatsApp = () => {
     trackAnalyticsEvent("whatsapp_click", { project: project.title });
     const msg = encodeURIComponent(
-      `Hello Glorious Real Estates, I am interested in ${project.title} (${project.configurations}) in Nanded. Please share the pricing breakdown and site visit schedule.`
+      `Hello ${demo.name}, I am interested in ${project.title} (${project.configurations}) in ${demo.city}. Please share the pricing breakdown and site visit schedule.`
     );
-    window.open(`https://wa.me/${siteConfig.contact.whatsapp}?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${demo.phoneLink}?text=${msg}`, "_blank");
   };
 
   return (
@@ -63,13 +66,13 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       {/* 1. Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <nav className="flex items-center gap-2 text-xs text-[#716B5E]">
-          <Link href="/" className="hover:text-[#1F2326]">
+          <AppLink href="/" className="hover:text-[#1F2326]">
             Home
-          </Link>
+          </AppLink>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/#projects" className="hover:text-[#1F2326]">
+          <AppLink href="/#projects" className="hover:text-[#1F2326]">
             Projects
-          </Link>
+          </AppLink>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[#1F2326] font-semibold">{project.title}</span>
         </nav>
@@ -116,7 +119,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             <button
               type="button"
               onClick={handleBookVisit}
-              className="px-6 py-3.5 rounded-full bg-[#B08A4E] hover:bg-[#96743D] text-white text-sm font-semibold shadow-md active:scale-97 transition-all animate-shimmer cursor-pointer"
+              className="btn-bronze px-6 py-3.5 rounded-full text-sm font-semibold shadow-md active:scale-97 transition-all cursor-pointer"
             >
               Book a Site Visit
             </button>
@@ -299,7 +302,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
                 <button
                   type="button"
                   onClick={handleBookVisit}
-                  className="w-full py-3.5 rounded-xl bg-[#B08A4E] hover:bg-[#96743D] text-white text-xs font-semibold shadow transition-all active:scale-98 cursor-pointer"
+                  className="btn-bronze w-full py-3.5 rounded-xl text-xs font-semibold shadow transition-all active:scale-98 cursor-pointer"
                 >
                   Schedule Layout Walkthrough
                 </button>
@@ -379,7 +382,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
               <button
                 type="button"
                 onClick={() => setIsFloorPlanZoomOpen(false)}
-                className="w-8 h-8 rounded-lg bg-[#B08A4E] text-white flex items-center justify-center ml-2"
+                className="btn-bronze w-8 h-8 rounded-lg flex items-center justify-center ml-2"
               >
                 <X className="w-5 h-5" />
               </button>

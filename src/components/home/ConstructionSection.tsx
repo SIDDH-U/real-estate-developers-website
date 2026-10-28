@@ -8,8 +8,10 @@ import { Award, Building, Maximize, ShieldCheck, ArrowRight, CheckCircle2, Chevr
 import AmbientBackground from "@/components/common/AmbientBackground";
 import SectionHeader from "@/components/common/SectionHeader";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function ConstructionSection() {
+  const { city, appendQuery } = useDemo();
   const [activeStage, setActiveStage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [storyProgress, setStoryProgress] = useState(0); // 0 to 100%
@@ -115,10 +117,10 @@ export default function ConstructionSection() {
         <SectionHeader
           eyebrow="CONSTRUCTION &amp; QUALITY"
           title="Built with Strength. Delivered with Trust."
-          subtitle="Strict quality control, modern German formwork, M40 concrete grades, and committed possession schedules certified by registered civil structural engineers in Nanded."
+          subtitle={`Strict quality control, modern German formwork, M40 concrete grades, and committed possession schedules certified by registered civil structural engineers in ${city}.`}
           action={
             <Link
-              href="/construction-updates"
+              href={appendQuery("/construction-updates")}
               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#B08A4E] hover:text-[#96743D] transition-colors group"
             >
               <span>View Updates</span>

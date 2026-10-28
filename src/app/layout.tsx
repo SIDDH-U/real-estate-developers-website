@@ -3,6 +3,8 @@ import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { LeadModalProvider } from "@/context/LeadModalContext";
+import { DemoProvider } from "@/context/DemoContext";
+import DemoStrip from "@/components/common/DemoStrip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileStickyBar from "@/components/MobileStickyBar";
@@ -31,34 +33,33 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gloriousrealestates.in"),
+  metadataBase: new URL("https://yourcompany.com"),
   title: {
-    default: `${siteConfig.name} | Luxury Homes & Commercial Spaces in Nanded`,
+    default: `${siteConfig.name} | Luxury Homes & Commercial Spaces in ${siteConfig.city}`,
     template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Glorious Real Estates develops premium residential 2 & 3 BHK apartments, luxury villas, and commercial spaces in Nanded, Maharashtra. RERA approved, on-time delivery, transparent pricing.",
+  description: `${siteConfig.name} develops premium residential 2 & 3 BHK apartments, luxury villas, and commercial spaces in ${siteConfig.city}, Maharashtra. RERA approved, on-time delivery, transparent pricing.`,
   keywords: [
-    "Glorious Real Estates",
-    "Real Estate Developers Nanded",
-    "Flats in Nanded",
-    "2 BHK in Nanded",
-    "3 BHK in Nanded",
-    "Greenview Heights Nanded",
-    "Orchid Villas Nanded",
-    "Pawdewadi Nanded property",
-    "Luxury apartments Nanded",
-    "MahaRERA approved Nanded",
+    siteConfig.name,
+    `Real Estate Developers ${siteConfig.city}`,
+    `Flats in ${siteConfig.city}`,
+    `2 BHK in ${siteConfig.city}`,
+    `3 BHK in ${siteConfig.city}`,
+    `Greenview Heights ${siteConfig.city}`,
+    `Orchid Villas ${siteConfig.city}`,
+    "Pawdewadi property",
+    `Luxury apartments ${siteConfig.city}`,
+    `MahaRERA approved ${siteConfig.city}`,
   ],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://gloriousrealestates.in",
+    url: "https://yourcompany.com",
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Premium Homes in Nanded`,
-    description: "Building Spaces You'll Call Home. Explore Greenview Heights and Orchid Villas in Nanded.",
+    title: `${siteConfig.name} | Premium Homes in ${siteConfig.city}`,
+    description: "Building Spaces You'll Call Home. Explore Greenview Heights and Orchid Villas.",
     images: [
       {
         url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
@@ -70,12 +71,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Luxury Homes in Nanded`,
+    title: `${siteConfig.name} | Luxury Homes in ${siteConfig.city}`,
     description: "Premium residences crafted with trust, quality, and timely delivery.",
     images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop"],
   },
   alternates: {
-    canonical: "https://gloriousrealestates.in",
+    canonical: "https://yourcompany.com",
   },
 };
 
@@ -84,14 +85,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Structured Data (Organization JSON-LD)
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: siteConfig.name,
     description: siteConfig.subheadline,
-    url: "https://gloriousrealestates.in",
-    logo: "https://gloriousrealestates.in/images/logo.svg",
+    url: "https://yourcompany.com",
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
     address: {
@@ -99,7 +98,6 @@ export default function RootLayout({
       streetAddress: siteConfig.address.street,
       addressLocality: siteConfig.address.city,
       addressRegion: siteConfig.address.state,
-      postalCode: siteConfig.address.pincode,
       addressCountry: "IN",
     },
     geo: {
@@ -117,9 +115,98 @@ export default function RootLayout({
     ],
   };
 
+  const prepaintScript = `
+(function() {
+  try {
+    var search = window.location.search;
+    var params = new URLSearchParams(search);
+    var s = window.sessionStorage;
+
+    function clean(v, max) {
+      if (!v) return "";
+      return String(v).trim().slice(0, max || 60);
+    }
+
+    var pName = clean(params.get("name"), 60);
+    var pCity = clean(params.get("city"), 60);
+    var pPhone = clean(params.get("phone"), 60);
+    var pInsta = clean(params.get("insta"), 60).replace(/^@+/, "");
+    var pColor = clean(params.get("color"), 10);
+
+    if (pColor && !/^#?[0-9a-fA-F]{6}$/.test(pColor)) {
+      pColor = "";
+    }
+
+    if (s) {
+      if (pName) s.setItem("demo_name", pName);
+      if (pCity) s.setItem("demo_city", pCity);
+      if (pPhone) s.setItem("demo_phone", pPhone);
+      if (pInsta) s.setItem("demo_insta", pInsta);
+      if (pColor) s.setItem("demo_color", pColor);
+    }
+
+    var name = pName || (s ? clean(s.getItem("demo_name"), 60) : "") || "Your Company";
+    var city = pCity || (s ? clean(s.getItem("demo_city"), 60) : "") || "Your City";
+    var color = pColor || (s ? clean(s.getItem("demo_color"), 10) : "") || "#B08A4E";
+    if (!/^#?[0-9a-fA-F]{6}$/.test(color)) color = "#B08A4E";
+    if (color.charAt(0) !== "#") color = "#" + color;
+
+    var num = parseInt(color.slice(1), 16);
+    var r = (num >> 16) & 255, g = (num >> 8) & 255, b = num & 255;
+    var lum = 0.2126 * Math.pow(r / 255, 2.2) + 0.7152 * Math.pow(g / 255, 2.2) + 0.0722 * Math.pow(b / 255, 2.2);
+    var contrast = lum > 0.45 ? "#1F2326" : "#FFFFFF";
+
+    var dark = "#" + [r * 0.82, g * 0.82, b * 0.82].map(function(x) {
+      var h = Math.round(x).toString(16);
+      return h.length === 1 ? "0" + h : h;
+    }).join("");
+
+    var light = "#" + [255 - (255 - r) * 0.82, 255 - (255 - g) * 0.82, 255 - (255 - b) * 0.82].map(function(x) {
+      var h = Math.round(x).toString(16);
+      return h.length === 1 ? "0" + h : h;
+    }).join("");
+
+    var tint = "rgba(" + r + "," + g + "," + b + ",0.12)";
+
+    var root = document.documentElement;
+    root.style.setProperty("--color-bronze", color);
+    root.style.setProperty("--color-bronze-dark", dark);
+    root.style.setProperty("--color-bronze-light", light);
+    root.style.setProperty("--color-bronze-tint", tint);
+    root.style.setProperty("--color-bronze-contrast", contrast);
+
+    var dismissed = s && s.getItem("demo_strip_dismissed") === "1";
+    root.style.setProperty("--demo-h", dismissed ? "0px" : "38px");
+
+    if (name !== "Your Company" || city !== "Your City") {
+      document.title = name + " | Luxury Homes & Commercial Spaces in " + city;
+    }
+
+    if (window.MutationObserver) {
+      var obs = new MutationObserver(function() {
+        var names = document.querySelectorAll("[data-demo-name]");
+        for (var i = 0; i < names.length; i++) {
+          if (names[i].textContent !== name) names[i].textContent = name;
+        }
+        var cities = document.querySelectorAll("[data-demo-city]");
+        for (var j = 0; j < cities.length; j++) {
+          if (cities[j].textContent !== city) cities[j].textContent = city;
+        }
+      });
+      obs.observe(document.documentElement, { childList: true, subtree: true });
+      setTimeout(function() { obs.disconnect(); }, 4000);
+    }
+  } catch (e) {}
+})();
+  `;
+
   return (
-    <html lang="en" className={`${playfair.variable} ${plusJakarta.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${plusJakarta.variable}`}>
       <head>
+        <script
+          id="demo-prepaint"
+          dangerouslySetInnerHTML={{ __html: prepaintScript }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -132,15 +219,18 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="font-sans bg-[#F7F3EC] text-[#1F2326] min-h-screen flex flex-col selection:bg-[#B08A4E] selection:text-white antialiased">
-        <LeadModalProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <MobileStickyBar />
-          <LeadModal />
-          <VideoModal />
-        </LeadModalProvider>
+      <body className="font-sans bg-[#F7F3EC] text-[#1F2326] min-h-screen flex flex-col selection:bg-[var(--color-bronze,#B08A4E)] selection:text-white antialiased">
+        <DemoProvider>
+          <LeadModalProvider>
+            <DemoStrip />
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <MobileStickyBar />
+            <LeadModal />
+            <VideoModal />
+          </LeadModalProvider>
+        </DemoProvider>
       </body>
     </html>
   );

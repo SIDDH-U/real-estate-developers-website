@@ -1,15 +1,15 @@
 "use client";
 
 import React, { Suspense } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { CheckCircle2, ArrowRight, MessageCircle, Home, Phone } from "lucide-react";
-import { siteConfig } from "@/config/site";
+import { CheckCircle2, MessageCircle, Home } from "lucide-react";
+import { useDemo } from "@/context/DemoContext";
+import AppLink from "@/components/common/AppLink";
 
 function ThankYouContent() {
   const searchParams = useSearchParams();
-  const ref = searchParams.get("ref") || "GL-CONFIRMED";
-  const intent = searchParams.get("intent") || "Inquiry";
+  const demo = useDemo();
+  const ref = searchParams.get("ref") || "DEMO-CONFIRMED";
 
   return (
     <div className="pt-32 pb-24 max-w-2xl mx-auto px-4 sm:px-6 text-center">
@@ -26,14 +26,14 @@ function ThankYouContent() {
       </h1>
 
       <p className="text-sm sm:text-base text-[#716B5E] mt-3 mb-8 leading-relaxed">
-        Your request has been registered with our senior residential desk in Nanded. A dedicated consultant will contact you within 30 minutes during sales desk hours.
+        Your request has been registered with our senior residential desk in <span data-demo-city suppressHydrationWarning>{demo.city}</span>. A dedicated consultant will contact you within 30 minutes during sales desk hours.
       </p>
 
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
         <a
-          href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
-            `Hello Glorious Real Estates, following up on reference ${ref}.`
+          href={`https://wa.me/${demo.phoneLink}?text=${encodeURIComponent(
+            `Hello ${demo.name}, following up on reference ${ref}.`
           )}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -43,13 +43,13 @@ function ThankYouContent() {
           <span>Chat on WhatsApp</span>
         </a>
 
-        <Link
+        <AppLink
           href="/"
           className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white border border-[#D8CEBD] text-[#1F2326] hover:bg-[#FAF6EE] text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs active:scale-98 transition-all"
         >
           <Home className="w-4 h-4 text-[#B08A4E]" />
           <span>Return Home</span>
-        </Link>
+        </AppLink>
       </div>
     </div>
   );

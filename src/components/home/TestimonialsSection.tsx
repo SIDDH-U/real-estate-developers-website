@@ -7,8 +7,10 @@ import { Star, ChevronLeft, ChevronRight, ArrowRight, Quote } from "lucide-react
 import { testimonialsData } from "@/data/projects";
 import AmbientBackground from "@/components/common/AmbientBackground";
 import SectionHeader from "@/components/common/SectionHeader";
+import { useDemo } from "@/context/DemoContext";
 
 export default function TestimonialsSection() {
+  const { name, city, appendQuery } = useDemo();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
@@ -30,11 +32,11 @@ export default function TestimonialsSection() {
         <SectionHeader
           eyebrow="HAPPY FAMILIES"
           title="What Our Customers Say"
-          subtitle="Real homeowners share their journey with Glorious Real Estates in Nanded."
+          subtitle={`Real homeowners share their journey with ${name} in ${city}.`}
           action={
             <div className="flex items-center gap-3">
               <Link
-                href="/reviews"
+                href={appendQuery("/reviews")}
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#B08A4E] hover:text-[#96743D] transition-colors"
               >
                 <span>View All Reviews</span>

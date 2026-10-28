@@ -6,8 +6,10 @@ import { Plane, Train, GraduationCap, Cross, ShoppingBag, Trees, ExternalLink, M
 import AmbientBackground from "@/components/common/AmbientBackground";
 import SectionHeader from "@/components/common/SectionHeader";
 import { siteConfig } from "@/config/site";
+import { useDemo } from "@/context/DemoContext";
 
 export default function LocationAdvantageSection() {
+  const { city, mapsSearchUrl } = useDemo();
   const locations = [
     {
       title: "Nanded Airport (NDC)",
@@ -63,11 +65,11 @@ export default function LocationAdvantageSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="CONNECTED LIVING"
-          title="Strategic Nanded Locations"
+          title={`Strategic ${city} Locations`}
           subtitle="Prime arterial connectivity across educational institutes, super-specialty hospitals, transit hubs, and commercial centers."
           action={
             <a
-              href={siteConfig.address.googleMapsLink}
+              href={mapsSearchUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-[#E5DFD5] text-xs font-semibold text-[#1F2326] hover:text-[#B08A4E] hover:border-[#B08A4E] transition-all shadow-xs"

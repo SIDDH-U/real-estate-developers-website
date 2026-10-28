@@ -15,10 +15,11 @@ import {
 import { siteConfig } from "@/config/site";
 import { projectsData } from "@/data/projects";
 import { trackAnalyticsEvent } from "@/lib/analytics";
-
-import Link from "next/link";
+import { useDemo } from "@/context/DemoContext";
+import AppLink from "@/components/common/AppLink";
 
 export default function ContactPage() {
+  const demo = useDemo();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -91,9 +92,9 @@ export default function ContactPage() {
   const handleWhatsApp = () => {
     trackAnalyticsEvent("whatsapp_click", { source: "contact_page" });
     const msg = encodeURIComponent(
-      `Hello Glorious Real Estates, I want to enquire regarding ${project}. My name is ${name || "a homebuyer"}.`
+      `Hello ${demo.name}, I want to enquire regarding ${project}. My name is ${name || "a homebuyer"}.`
     );
-    window.open(`https://wa.me/${siteConfig.contact.whatsapp}?text=${msg}`, "_blank");
+    window.open(`https://wa.me/${demo.phoneLink}?text=${msg}`, "_blank");
   };
 
   return (
@@ -137,11 +138,11 @@ export default function ContactPage() {
                   <div>
                     <div className="text-xs text-[#716B5E] font-medium">Direct Telephone</div>
                     <a
-                      href={`tel:${siteConfig.contact.phone}`}
+                      href={`tel:${demo.phoneTel}`}
                       onClick={handleCall}
                       className="font-semibold text-[#1F2326] hover:text-[#B08A4E] mt-0.5 block"
                     >
-                      {siteConfig.contact.phoneDisplay}
+                      <span data-demo-phone suppressHydrationWarning>{demo.phoneDisplay}</span>
                     </a>
                   </div>
                 </div>
@@ -194,7 +195,7 @@ export default function ContactPage() {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Glorious Real Estates Location Map"
+                  title={`${demo.name} Location Map`}
                 />
               </div>
             </div>
@@ -316,9 +317,9 @@ export default function ContactPage() {
                   />
                   <label htmlFor="contact-consent" className="text-xs text-[#716B5E] leading-snug cursor-pointer select-none">
                     I consent to receive consultation details and project updates via WhatsApp / Call. View our{" "}
-                    <Link href="/privacy" className="text-[#B08A4E] underline hover:text-[#96743D]">
+                    <AppLink href="/privacy" className="text-[#B08A4E] underline hover:text-[#96743D]">
                       Privacy Policy
-                    </Link>.
+                    </AppLink>.
                   </label>
                 </div>
 
@@ -326,7 +327,7 @@ export default function ContactPage() {
                   <div className="text-xs text-rose-700 bg-rose-50 p-3 rounded-xl border border-rose-200">
                     {errorMessage}{" "}
                     <a
-                      href={`https://wa.me/${siteConfig.contact.whatsapp}`}
+                      href={`https://wa.me/${demo.phoneLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="underline font-semibold"
@@ -341,7 +342,7 @@ export default function ContactPage() {
                   disabled={!isFormValid || isSubmitting}
                   className={`w-full py-4 rounded-2xl text-sm font-semibold shadow-md flex items-center justify-center gap-2 transition-all ${
                     isFormValid && !isSubmitting
-                      ? "bg-[#B08A4E] hover:bg-[#96743D] text-white active:scale-98 cursor-pointer shadow-lg shadow-[#B08A4E]/20"
+                      ? "btn-bronze cursor-pointer shadow-lg shadow-[#B08A4E]/20"
                       : "bg-[#E5DFD5] text-[#8C816E] cursor-not-allowed border border-[#D8CEBD]"
                   }`}
                 >
@@ -376,7 +377,7 @@ export default function ContactPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center gap-3">
                   <a
-                    href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+                    href={`https://wa.me/${demo.phoneLink}?text=${encodeURIComponent(
                       submittedResult.whatsappText
                     )}`}
                     target="_blank"

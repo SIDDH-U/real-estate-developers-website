@@ -6,8 +6,10 @@ import { ChevronDown, HelpCircle, ArrowRight } from "lucide-react";
 import AmbientBackground from "@/components/common/AmbientBackground";
 import SectionHeader from "@/components/common/SectionHeader";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function FaqSection() {
+  const { name, city } = useDemo();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const { openLeadModal } = useLeadModal();
 
@@ -25,7 +27,7 @@ export default function FaqSection() {
     {
       question: "Are your projects fully registered with MahaRERA and legally verified?",
       answer:
-        "Yes, 100%. Every project launched by Glorious Real Estates has clear marketable title, registered NA sanction, town planning approval, and individual MahaRERA certification. All legal certificates are openly available for buyer inspection.",
+        `Yes, 100%. Every project launched by ${name} has clear marketable title, registered NA sanction, town planning approval, and individual MahaRERA certification. All legal certificates are openly available for buyer inspection.`,
     },
     {
       question: "What payment plans and construction-linked milestones do you offer?",
@@ -35,7 +37,7 @@ export default function FaqSection() {
     {
       question: "How do I book a private site visit or sample flat walkthrough?",
       answer:
-        "Site visits can be scheduled 7 days a week between 9:00 AM and 7:30 PM. We provide complimentary pickup and drop services within Nanded city limits, along with an architect-accompanied guided tour of the sample flat.",
+        `Site visits can be scheduled 7 days a week between 9:00 AM and 7:30 PM. We provide complimentary pickup and drop services within ${city} city limits, along with an architect-accompanied guided tour of the sample flat.`,
     },
   ];
 

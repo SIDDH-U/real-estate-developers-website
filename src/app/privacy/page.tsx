@@ -1,11 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import AppLink from "@/components/common/AppLink";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Glorious Real Estates",
-  description: "Privacy policy and data protection practices at Glorious Real Estates.",
+  title: `Privacy Policy | ${siteConfig.name}`,
+  description: `Privacy policy and data protection practices at ${siteConfig.name}.`,
 };
 
 export default function PrivacyPage() {
@@ -24,7 +24,7 @@ export default function PrivacyPage() {
       </p>
       <div className="prose prose-stone text-sm text-[#716B5E] space-y-4 leading-relaxed">
         <p>
-          At {siteConfig.name}, we hold the privacy of our homebuyers and visitors in the highest regard. This policy outlines how we handle the contact details you provide when requesting project brochures or booking site visits.
+          At <span data-demo-name suppressHydrationWarning>{siteConfig.name}</span>, we hold the privacy of our homebuyers and visitors in the highest regard. This policy outlines how we handle the contact details you provide when requesting project brochures or booking site visits.
         </p>
         <h2 className="text-xl font-serif font-bold text-[#1F2326] pt-4">Data Collection &amp; Purpose</h2>
         <p>
@@ -32,16 +32,16 @@ export default function PrivacyPage() {
         </p>
         <h2 className="text-xl font-serif font-bold text-[#1F2326] pt-4">Zero Third-Party Sharing</h2>
         <p>
-          We do not sell, rent, or distribute your personal data to external third-party advertisers. All communications originate directly from our certified in-house sales team in Nanded.
+          We do not sell, rent, or distribute your personal data to external third-party advertisers. All communications originate directly from our certified in-house sales team in <span data-demo-city suppressHydrationWarning>{siteConfig.city}</span>.
         </p>
         <h2 className="text-xl font-serif font-bold text-[#1F2326] pt-4">Opt-Out &amp; Contact</h2>
         <p>
           You may opt out of promotional messages or WhatsApp updates at any time by replying &quot;STOP&quot; or emailing us at {siteConfig.contact.email}.
         </p>
         <div className="pt-6">
-          <Link href="/" className="text-[#B08A4E] font-semibold hover:underline">
+          <AppLink href="/" className="text-[#B08A4E] font-semibold hover:underline">
             ← Return to Homepage
-          </Link>
+          </AppLink>
         </div>
       </div>
     </div>

@@ -138,7 +138,7 @@
   <!-- Architectural Stamp & Watermark -->
   <g transform="translate(820, 580)">
     <rect x="0" y="0" width="115" height="55" fill="#FAF6EE" stroke="#B08A4E" stroke-width="1.5" />
-    <text x="57" y="20" text-anchor="middle" font-family="'Times New Roman', serif" font-size="10" font-weight="bold" fill="#B08A4E">GLORIOUS REALTY</text>
+    <text x="57" y="20" text-anchor="middle" font-family="'Times New Roman', serif" font-size="10" font-weight="bold" fill="#B08A4E">ARCHITECTURAL PLAN</text>
     <text x="57" y="34" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#1F2326">ARCHITECT APPROVED</text>
     <text x="57" y="46" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#716B5E">MAHA-RERA VERIFIED</text>
   </g>

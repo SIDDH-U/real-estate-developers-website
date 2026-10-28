@@ -7,8 +7,10 @@ import { motion } from "framer-motion";
 import { Building2, Waves, Trees, Dumbbell, Baby, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import AmbientBackground from "@/components/common/AmbientBackground";
 import SectionHeader from "@/components/common/SectionHeader";
+import { useDemo } from "@/context/DemoContext";
 
 export default function AmenitiesSection() {
+  const { appendQuery } = useDemo();
   const [mobileActiveIdx, setMobileActiveIdx] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -91,7 +93,7 @@ export default function AmenitiesSection() {
           subtitle="Curated lifestyle amenities built to elevate wellness, recreation, and family connection."
           action={
             <Link
-              href="/amenities"
+              href={appendQuery("/amenities")}
               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#B08A4E] hover:text-[#96743D] transition-colors group"
             >
               <span>View All Amenities</span>

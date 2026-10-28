@@ -28,6 +28,6 @@
   </g>
 
   <!-- Brand Typography -->
-  <text x="64" y="31" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="21" font-weight="700" fill="#F7F3EC" letter-spacing="2.5">GLORIOUS</text>
-  <text x="65" y="45" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#D5CBB9" letter-spacing="3.2">REAL ESTATES</text>
+  <text x="64" y="31" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="20" font-weight="700" fill="#F7F3EC" letter-spacing="2.5">DEVELOPER</text>
+  <text x="65" y="45" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#D5CBB9" letter-spacing="3.2">PREMIUM HOMES</text>
 </svg>

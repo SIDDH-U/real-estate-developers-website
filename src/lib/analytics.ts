@@ -48,7 +48,7 @@ export function trackAnalyticsEvent(eventName: AnalyticsEventName, payload?: Ana
 
   // 3. Dispatch standard CustomEvent for third-party listeners
   try {
-    const customEvent = new CustomEvent(`glorious:${eventName}`, { detail: eventData });
+    const customEvent = new CustomEvent(`realestate:${eventName}`, { detail: eventData });
     window.dispatchEvent(customEvent);
   } catch {
     // Ignore legacy browser issues

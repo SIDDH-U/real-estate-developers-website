@@ -82,15 +82,15 @@ export const projectsData: Project[] = [
     id: "proj-greenview-heights",
     slug: "greenview-heights",
     title: "Greenview Heights",
-    tagline: "2 & 3 BHK Premium Residences in Nanded",
+    tagline: "2 & 3 BHK Premium Residences",
     category: "Residential",
     status: "Under Construction",
     statusColor: "emerald",
     featured: true,
     location: {
       area: "Pawdewadi",
-      city: "Nanded",
-      fullAddress: "Pawdewadi Bypass, Near Airport Road, Nanded - 431605",
+      city: "Your City",
+      fullAddress: "Pawdewadi Bypass, Near Airport Road",
       landmark: "5 mins from Nanded Airport Road",
     },
     pricing: {
@@ -113,7 +113,7 @@ export const projectsData: Project[] = [
       "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=1200&auto=format&fit=crop",
     ],
     overview:
-      "Greenview Heights stands as a beacon of modern luxury in Pawdewadi, Nanded. Designed for families seeking contemporary architecture combined with tranquil open greens, each residence is Vastu-compliant, well-ventilated, and finished with top-tier Italian marble and bespoke fixtures.",
+      "Greenview Heights stands as a beacon of modern luxury in Pawdewadi. Designed for families seeking contemporary architecture combined with tranquil open greens, each residence is Vastu-compliant, well-ventilated, and finished with top-tier Italian marble and bespoke fixtures.",
     highlights: [
       "Prime location in Pawdewadi with wide 4-lane access",
       "3-tier 24x7 biometric & CCTV security surveillance",
@@ -228,8 +228,8 @@ export const projectsData: Project[] = [
     featured: false,
     location: {
       area: "VIP Road Extension",
-      city: "Nanded",
-      fullAddress: "Plot 42, VIP Road Extension, Near Medical College, Nanded - 431602",
+      city: "Your City",
+      fullAddress: "Plot 42, VIP Road Extension, Near Medical College",
       landmark: "Opposite Riverview Greens",
     },
     pricing: {
@@ -251,7 +251,7 @@ export const projectsData: Project[] = [
       "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200&auto=format&fit=crop",
     ],
     overview:
-      "Orchid Villas redefines exclusivity in Nanded with limited-edition duplex and triplex independent residences. Nestled within private landscaped courtyards, each villa offers private terrace gardens, dedicated covered dual car porches, and high-ceiling formal living areas.",
+      "Orchid Villas redefines exclusivity with limited-edition duplex and triplex independent residences. Nestled within private landscaped courtyards, each villa offers private terrace gardens, dedicated covered dual car porches, and high-ceiling formal living areas.",
     highlights: [
       "Exclusive gated enclave of only 48 designer villas",
       "Private lawn and rooftop terrace with pergola",
@@ -320,8 +320,8 @@ export const projectsData: Project[] = [
     featured: false,
     location: {
       area: "Godavari Riverfront",
-      city: "Nanded",
-      fullAddress: "Old Nanded Riverside Promenade, Nanded - 431601",
+      city: "Your City",
+      fullAddress: "Godavari Riverfront Promenade",
       landmark: "Adjacent to Ghat Garden Promenade",
     },
     pricing: {
@@ -385,9 +385,9 @@ export const projectsData: Project[] = [
     ],
   },
   {
-    id: "proj-glorious-square",
+    id: "proj-landmark-square",
     slug: "glorious-square",
-    title: "Glorious Square",
+    title: "Landmark Square",
     tagline: "High-Street Retail Shops & Corporate Offices",
     category: "Commercial",
     status: "Under Construction",
@@ -395,8 +395,8 @@ export const projectsData: Project[] = [
     featured: false,
     location: {
       area: "Shivaji Nagar Main Road",
-      city: "Nanded",
-      fullAddress: "Shivaji Nagar Commercial Hub, Nanded - 431602",
+      city: "Your City",
+      fullAddress: "Shivaji Nagar Commercial Hub",
       landmark: "Opposite District Court Complex",
     },
     pricing: {
@@ -417,12 +417,12 @@ export const projectsData: Project[] = [
       "https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1200&auto=format&fit=crop",
     ],
     overview:
-      "Glorious Square is Nanded's landmark commercial destination. Featuring high-visibility street frontages for flagship retail brands, upscale boutique clinics, and tech-ready corporate suites with high-speed elevators and multi-level automated basement car parking.",
+      "Landmark Square is a landmark commercial destination. Featuring high-visibility street frontages for flagship retail brands, upscale boutique clinics, and tech-ready corporate suites with high-speed elevators and multi-level automated basement car parking.",
     highlights: [
       "Massive 120-foot frontage on prime commercial transit corridor",
       "14-foot ceiling height for ground floor retail units",
       "3 high-speed Otis elevators & dedicated goods elevator",
-      "Expected 8-10% rental yield in Nanded's commercial center",
+      "Expected 8-10% rental yield in prime commercial center",
     ],
     amenities: [
       {
@@ -488,7 +488,7 @@ export const testimonialsData: Testimonial[] = [
     role: "Homeowner",
     projectName: "Greenview Heights",
     projectSlug: "greenview-heights",
-    quote: "Smooth process, transparent pricing and great support throughout. Very happy with our new home in Nanded! The construction updates gave our family complete confidence.",
+    quote: "Smooth process, transparent pricing and great support throughout. Very happy with our new home! The construction updates gave our family complete confidence.",
     rating: 5,
     date: "January 2026",
   },
@@ -499,7 +499,7 @@ export const testimonialsData: Testimonial[] = [
     role: "Chartered Accountant & Investor",
     projectName: "Greenview Heights",
     projectSlug: "greenview-heights",
-    quote: "Excellent construction quality and on-time delivery. Truly a trustworthy developer in Nanded with 100% legal clarity. Their attention to material quality stands out.",
+    quote: "Excellent construction quality and on-time delivery. Truly a trustworthy developer with 100% legal clarity. Their attention to material quality stands out.",
     rating: 5,
     date: "December 2025",
   },

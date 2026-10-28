@@ -20,12 +20,14 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { useLeadModal, LeadIntent } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 import { projectsData } from "@/data/projects";
 import { siteConfig } from "@/config/site";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 
 export default function LeadSheet() {
   const { isOpen, options, closeLeadModal, isVideoModalOpen, videoUrl, closeVideoModal } = useLeadModal();
+  const demo = useDemo();
 
   const intent: LeadIntent = options.intent || "site_visit";
   const defaultProject = options.projectName || options.project || "Greenview Heights";
@@ -45,6 +47,11 @@ export default function LeadSheet() {
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false); // UNCHECKED BY DEFAULT per rule
   const [honeypot, setHoneypot] = useState("");
+  const [minDate, setMinDate] = useState("");
+
+  useEffect(() => {
+    setMinDate(new Date().toISOString().split("T")[0]);
+  }, []);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedResult, setSubmittedResult] = useState<{
@@ -151,7 +158,7 @@ export default function LeadSheet() {
           nextStep: data.nextStep,
           whatsappText:
             data.whatsappPrefilledText ||
-            `Hi Glorious Real Estates, I submitted an inquiry for ${project} (Ref: ${data.ref}).`,
+            `Hi ${demo.name}, I submitted an inquiry for ${project} (Ref: ${data.ref}).`,
         });
 
         // Trigger analytics event
@@ -218,7 +225,7 @@ export default function LeadSheet() {
   > = {
     site_visit: {
       title: "Book a Site Visit",
-      subcopy: "Schedule a private site tour and sample flat walkthrough in Nanded.",
+      subcopy: `Schedule a private site tour and sample flat walkthrough in ${demo.city}.`,
       submitLabel: "Confirm Site Visit",
     },
     walkthrough: {
@@ -248,7 +255,7 @@ export default function LeadSheet() {
     },
     general: {
       title: "Send an Inquiry",
-      subcopy: "Connect with our certified developers in Nanded.",
+      subcopy: `Connect with our certified developers in ${demo.city}.`,
       submitLabel: "Submit Inquiry",
     },
   };
@@ -350,7 +357,7 @@ export default function LeadSheet() {
                     <div className="w-full flex flex-col gap-2.5">
                       {/* WhatsApp Continue Button with prefilled Ref */}
                       <a
-                        href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+                        href={`https://wa.me/${demo.phoneLink}?text=${encodeURIComponent(
                           submittedResult.whatsappText
                         )}`}
                         target="_blank"
@@ -463,7 +470,7 @@ export default function LeadSheet() {
                             type="date"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
-                            min={new Date().toISOString().split("T")[0]}
+                            min={minDate || undefined}
                             className="w-full h-11 px-3 rounded-xl border border-[#D8CEBD] bg-white text-xs text-[#1F2326] outline-none"
                           />
                         </div>
@@ -656,7 +663,7 @@ export default function LeadSheet() {
                         className="mt-0.5 w-4 h-4 rounded border-[#D8CEBD] text-[#B08A4E] focus:ring-[#B08A4E] cursor-pointer"
                       />
                       <label htmlFor="leadsheet-consent" className="text-[11px] text-[#716B5E] leading-relaxed select-none">
-                        I authorize Glorious Real Estates &amp; its representatives to contact me via Call, SMS &amp; WhatsApp regarding property updates and offers. Read our{" "}
+                        I authorize <span data-demo-name suppressHydrationWarning>{demo.name}</span> &amp; its representatives to contact me via Call, SMS &amp; WhatsApp regarding property updates and offers. Read our{" "}
                         <Link href="/privacy" target="_blank" className="text-[#B08A4E] underline font-semibold">
                           Privacy Policy
                         </Link>
@@ -722,7 +729,7 @@ export default function LeadSheet() {
               </button>
               <iframe
                 src={`${videoUrl}?autoplay=1`}
-                title="Glorious Real Estates Project Walkthrough"
+                title={`${demo.name} Project Walkthrough`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"

@@ -11,8 +11,11 @@ import { projectsData } from "@/data/projects";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import PhoneRingingIcon from "@/components/common/PhoneRingingIcon";
+import { useDemo } from "@/context/DemoContext";
+import BrandWordmark from "@/components/common/BrandWordmark";
 
 export default function Header() {
+  const demo = useDemo();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -77,8 +80,10 @@ export default function Header() {
 
   const handleWhatsAppClick = () => {
     trackAnalyticsEvent("whatsapp_click", { source: "mobile_menu" });
-    const msg = encodeURIComponent(siteConfig.contact.whatsappDefaultMessage);
-    window.open(`https://wa.me/${siteConfig.contact.whatsapp}?text=${msg}`, "_blank");
+    const msg = encodeURIComponent(
+      `Hello ${demo.name} team, I would like to schedule a site visit and enquire about your premium residences in ${demo.city}.`
+    );
+    window.open(`https://wa.me/${demo.phoneLink}?text=${msg}`, "_blank");
   };
 
   // On home transparent hero vs scrolled
@@ -87,7 +92,8 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        style={{ top: "var(--demo-h, 0px)" }}
+        className={`fixed left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? "bg-[#F7F3EC]/95 backdrop-blur-md shadow-xs border-b border-[#E5DFD5]/80 py-3"
             : "bg-transparent py-3.5 sm:py-5"
@@ -95,21 +101,13 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo: White variant over hero, dark variant when scrolled */}
+            {/* Logo: Brand Wordmark (White variant over hero, dark variant when scrolled) */}
             <Link
-              href="/"
+              href={demo.appendQuery("/")}
               className="flex items-center gap-2 group transition-transform active:scale-98 z-50"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="relative w-44 h-10 md:w-52 md:h-12">
-                <Image
-                  src={isHeroTransparent && !isScrolled ? "/images/logo-white.svg" : "/images/logo.svg"}
-                  alt={siteConfig.name}
-                  fill
-                  priority
-                  className="object-contain object-left transition-opacity duration-300"
-                />
-              </div>
+              <BrandWordmark isWhite={isHeroTransparent && !isScrolled} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -123,7 +121,7 @@ export default function Header() {
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
-                  href={link.href}
+                  href={demo.appendQuery(link.href)}
                   className={`px-4 py-1.5 text-[15px] font-medium rounded-full transition-colors ${
                     isHeroTransparent
                       ? "text-white/90 hover:text-white hover:bg-white/10"
@@ -138,7 +136,7 @@ export default function Header() {
             {/* Desktop Action Buttons with Ringing Call Icon */}
             <div className="hidden lg:flex items-center gap-3">
               <a
-                href={`tel:${siteConfig.contact.phoneTel}`}
+                href={`tel:${demo.phoneTel}`}
                 onClick={handlePhoneClick}
                 className={`flex items-center gap-2 px-3.5 py-2 text-sm font-semibold transition-colors ${
                   isHeroTransparent
@@ -148,7 +146,7 @@ export default function Header() {
                 title="Call sales office"
               >
                 <PhoneRingingIcon size={15} iconClassName="w-3.5 h-3.5 text-[#B08A4E]" rippleClassName="bg-[#B08A4E]/40" />
-                <span className="text-xs">{siteConfig.contact.phoneDisplay}</span>
+                <span className="text-xs" suppressHydrationWarning>{demo.phoneDisplay}</span>
               </a>
 
               <button
@@ -305,7 +303,7 @@ export default function Header() {
               <div className="relative z-10 pt-3 flex flex-col gap-2.5">
                 <div className="grid grid-cols-2 gap-2.5">
                   <a
-                    href={`tel:${siteConfig.contact.phoneTel}`}
+                    href={`tel:${demo.phoneTel}`}
                     onClick={handlePhoneClick}
                     className="h-11 rounded-xl bg-white/10 border border-white/20 text-white text-xs font-semibold flex items-center justify-center gap-2 active:scale-97 transition-all cursor-pointer"
                   >

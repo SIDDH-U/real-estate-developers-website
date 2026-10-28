@@ -6,11 +6,14 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Phone, ArrowRight, ShieldCheck, Check } from "lucide-react";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import AmbientBackground from "@/components/common/AmbientBackground";
+import AppLink from "@/components/common/AppLink";
 
 export default function CtaBanner() {
   const { openLeadModal } = useLeadModal();
+  const demo = useDemo();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [consent, setConsent] = useState(false); // UNCHECKED BY DEFAULT
@@ -126,7 +129,7 @@ export default function CtaBanner() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xs sm:text-base text-[#D8CEBD] mb-6 sm:mb-8 leading-relaxed max-w-xl"
           >
-            Connect directly with our senior development consultants for floor plans, bank approvals, and private site visits in Nanded.
+            Connect directly with our senior development consultants for floor plans, bank approvals, and private site visits in <span data-demo-city suppressHydrationWarning>{demo.city}</span>.
           </motion.p>
 
           {submittedResult ? (
@@ -148,7 +151,7 @@ export default function CtaBanner() {
                 {submittedResult.nextStep}
               </p>
               <a
-                href={`https://wa.me/918080076322?text=${encodeURIComponent(submittedResult.whatsappText)}`}
+                href={`https://wa.me/${demo.phoneLink}?text=${encodeURIComponent(submittedResult.whatsappText)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow transition-all active:scale-97"
@@ -238,9 +241,9 @@ export default function CtaBanner() {
                 />
                 <label htmlFor="cta-consent" className="text-[11px] text-[#D8CEBD] leading-snug cursor-pointer select-none">
                   I consent to receive site visit details and project updates via WhatsApp / Call. View our{" "}
-                  <Link href="/privacy" className="text-[#C9A66B] hover:underline">
+                  <AppLink href="/privacy" className="text-[#C9A66B] hover:underline">
                     Privacy Policy
-                  </Link>.
+                  </AppLink>.
                 </label>
               </div>
 
@@ -248,7 +251,7 @@ export default function CtaBanner() {
                 <div className="text-xs text-rose-300 bg-rose-950/40 p-2.5 rounded-xl border border-rose-800/50 mt-1">
                   {errorMessage}{" "}
                   <a
-                    href="https://wa.me/918080076322"
+                    href={`https://wa.me/${demo.phoneLink}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline font-semibold"

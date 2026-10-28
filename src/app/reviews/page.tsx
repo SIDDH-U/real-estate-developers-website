@@ -4,9 +4,11 @@ import React from "react";
 import { Star, Quote, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { testimonialsData } from "@/data/projects";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function ReviewsPage() {
   const { openLeadModal } = useLeadModal();
+  const demo = useDemo();
 
   return (
     <div className="pt-28 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,10 +18,10 @@ export default function ReviewsPage() {
           CLIENT EXPERIENCES
         </span>
         <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1F2326] leading-tight">
-          What Homeowners Say About Glorious Real Estates
+          What Homeowners Say About <span data-demo-name suppressHydrationWarning>{demo.name}</span>
         </h1>
         <p className="text-sm sm:text-base text-[#716B5E] mt-3 leading-relaxed">
-          Over 500 happy families have found their dream homes with our legal clarity, on-time delivery, and transparent transactions in Nanded.
+          Over 500 happy families have found their dream homes with our legal clarity, on-time delivery, and transparent transactions in <span data-demo-city suppressHydrationWarning>{demo.city}</span>.
         </p>
       </div>
 
@@ -65,7 +67,7 @@ export default function ReviewsPage() {
       {/* CTA Box */}
       <div className="mt-16 bg-[#F7F3EC] border border-[#E5DFD5] rounded-3xl p-8 sm:p-10 text-center max-w-2xl mx-auto">
         <h2 className="text-2xl font-serif font-bold text-[#1F2326] mb-2">
-          Experience the Glorious Standard
+          Experience the <span data-demo-name suppressHydrationWarning>{demo.name}</span> Standard
         </h2>
         <p className="text-xs sm:text-sm text-[#716B5E] mb-6">
           Schedule a private consultation and discover our upcoming residential communities.

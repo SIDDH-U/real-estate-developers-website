@@ -10,8 +10,10 @@ import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import AmbientBackground from "@/components/common/AmbientBackground";
 import HairlineDivider from "@/components/common/HairlineDivider";
+import { useDemo } from "@/context/DemoContext";
 
 export default function ProjectsSection() {
+  const { city, appendQuery } = useDemo();
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const { openLeadModal } = useLeadModal();
 
@@ -61,12 +63,12 @@ export default function ProjectsSection() {
             </div>
 
             <p className="text-xs sm:text-base text-[#716B5E] mt-1.5 max-w-xl">
-              Thoughtfully planned landmark addresses situated in Nanded&apos;s prime growth corridors.
+              Thoughtfully planned landmark addresses situated in <span suppressHydrationWarning>{city}</span>&apos;s prime growth corridors.
             </p>
           </div>
 
           <Link
-            href="/projects"
+            href={appendQuery("/projects")}
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#B08A4E] hover:text-[#96743D] transition-colors group w-fit"
           >
             <span>View All Projects</span>
@@ -190,7 +192,7 @@ export default function ProjectsSection() {
                           </div>
 
                           <Link
-                            href={`/projects/${project.slug}#floor-plans`}
+                            href={appendQuery(`/projects/${project.slug}#floor-plans`)}
                             aria-label={`Explore ${project.title} Floor Plans & Specs`}
                             className="w-10 h-10 rounded-full bg-[#FAF6EE] group-hover:bg-[#B08A4E] text-[#1F2326] group-hover:text-white flex items-center justify-center border border-[#E5DFD5] transition-all duration-300 active:scale-95 cursor-pointer"
                           >

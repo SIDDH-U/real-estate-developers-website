@@ -22,8 +22,10 @@ import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import AmbientBackground from "@/components/common/AmbientBackground";
 import HairlineDivider from "@/components/common/HairlineDivider";
+import { useDemo } from "@/context/DemoContext";
 
 export default function FeaturedProjectSection() {
+  const { city } = useDemo();
   const featuredProject = projectsData.find((p) => p.featured) || projectsData[0];
   const [activeTab, setActiveTab] = useState<"floorplan" | "gallery" | "highlights">("floorplan");
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
@@ -80,7 +82,7 @@ export default function FeaturedProjectSection() {
             </div>
             <div className="flex items-center gap-1.5 text-xs sm:text-sm text-[#716B5E]">
               <MapPin className="w-3.5 h-3.5 text-[#B08A4E]" />
-              <span>{featuredProject.location.fullAddress}</span>
+              <span suppressHydrationWarning>{featuredProject.location.fullAddress}, {city}</span>
             </div>
           </div>
         </div>

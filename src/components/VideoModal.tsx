@@ -3,9 +3,11 @@
 import React, { useEffect } from "react";
 import { X, Play } from "lucide-react";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function VideoModal() {
   const { isVideoModalOpen, videoUrl, closeVideoModal } = useLeadModal();
+  const demo = useDemo();
 
   useEffect(() => {
     if (isVideoModalOpen) {
@@ -55,7 +57,7 @@ export default function VideoModal() {
         <div className="relative aspect-video w-full bg-black">
           <iframe
             src={`${videoUrl}?autoplay=0&rel=0`}
-            title="Glorious Real Estates Architectural Walkthrough"
+            title={`${demo.name} Architectural Walkthrough`}
             className="w-full h-full border-0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

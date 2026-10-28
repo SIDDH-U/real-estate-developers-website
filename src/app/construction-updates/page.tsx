@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, Calendar, HardHat, ArrowRight, ShieldCheck } from "lucide-react";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function ConstructionUpdatesPage() {
   const { openLeadModal } = useLeadModal();
+  const demo = useDemo();
 
   const milestones = [
     {
@@ -59,7 +61,7 @@ export default function ConstructionUpdatesPage() {
           Construction Progress &amp; Photographic Timeline
         </h1>
         <p className="text-sm sm:text-base text-[#716B5E] mt-3 leading-relaxed">
-          Monthly verified progress logs for Greenview Heights and ongoing developments in Nanded, certified by chartered civil engineers.
+          Monthly verified progress logs for Greenview Heights and ongoing developments in <span data-demo-city suppressHydrationWarning>{demo.city}</span>, certified by chartered civil engineers.
         </p>
       </div>
 

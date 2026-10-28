@@ -13,8 +13,10 @@ import {
 import { siteConfig } from "@/config/site";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { trackAnalyticsEvent } from "@/lib/analytics";
+import { useDemo } from "@/context/DemoContext";
 
 export default function Hero() {
+  const demo = useDemo();
   const { openLeadModal, openVideoModal } = useLeadModal();
   const [animatedPrice, setAnimatedPrice] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -98,9 +100,10 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[100svh] w-full overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 bg-[#0F1412]"
+      className="relative min-h-[100svh] w-full overflow-hidden flex flex-col justify-between bg-[#0F1412]"
       style={{
         opacity: Math.max(0.3, 1 - scrollY / 900),
+        paddingTop: "calc(6rem + var(--demo-h, 0px))",
       }}
     >
       {/* 1. SINGLE FULL-BLEED PICTURE RUNNING EDGE TO EDGE BEHIND HEADER */}
@@ -118,7 +121,7 @@ export default function Hero() {
           />
           <img
             src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2400&auto=format&fit=crop"
-            alt="Glorious Real Estates luxury residences in Nanded at golden hour"
+            alt={`${demo.name} luxury residences in ${demo.city} at golden hour`}
             fetchPriority="high"
             className="w-full h-full object-cover object-bottom animate-ken-burns filter contrast-[1.03] brightness-[1.02]"
           />
@@ -202,7 +205,8 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: easeLuxury, delay: 0.6 }}
               className="text-base sm:text-lg md:text-xl text-white/90 max-w-xl font-normal leading-relaxed drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]"
             >
-              {siteConfig.subheadline}
+              Premium residences crafted with trust, quality and timely delivery in{" "}
+              <span suppressHydrationWarning>{demo.city}</span>.
             </motion.p>
 
             {/* Action Buttons */}
@@ -322,8 +326,8 @@ export default function Hero() {
                     <span className="font-medium">{liveSalesStatus}</span>
                   </div>
 
-                  <span className="text-xs text-white/80 font-medium">
-                    Pawdewadi, Nanded
+                  <span className="text-xs text-white/80 font-medium" suppressHydrationWarning>
+                    Pawdewadi, {demo.city}
                   </span>
                 </div>
 

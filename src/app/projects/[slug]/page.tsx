@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { projectsData } from "@/data/projects";
 import ProjectDetailClient from "./ProjectDetailClient";
 
+import { siteConfig } from "@/config/site";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -25,10 +27,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${project.title} | 2 & 3 BHK in ${project.location.area}, Nanded`,
-    description: `${project.title} by Glorious Real Estates in ${project.location.area}, Nanded. ${project.configurations}, pricing ${project.pricing.startingPrice}. ${project.overview}`,
+    title: `${project.title} | 2 & 3 BHK in ${project.location.area}, ${siteConfig.city}`,
+    description: `${project.title} by ${siteConfig.name} in ${project.location.area}, ${siteConfig.city}. ${project.configurations}, pricing ${project.pricing.startingPrice}. ${project.overview}`,
     openGraph: {
-      title: `${project.title} - Glorious Real Estates Nanded`,
+      title: `${project.title} - ${siteConfig.name} ${siteConfig.city}`,
       description: project.overview,
       images: [{ url: project.heroImage, width: 1200, height: 630 }],
     },

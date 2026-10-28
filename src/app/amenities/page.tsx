@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Building2, Waves, Trees, Dumbbell, Baby, ArrowRight, ShieldCheck } from "lucide-react";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useDemo } from "@/context/DemoContext";
 
 export default function AmenitiesPage() {
   const { openLeadModal } = useLeadModal();
+  const demo = useDemo();
 
   const allAmenities = [
     {
@@ -58,7 +60,7 @@ export default function AmenitiesPage() {
           Amenities Designed for a Better Everyday
         </h1>
         <p className="text-sm sm:text-base text-[#716B5E] mt-3 leading-relaxed">
-          Experience recreation, wellness, and serene open spaces thoughtfully integrated into every Glorious residential master plan in Nanded.
+          Experience recreation, wellness, and serene open spaces thoughtfully integrated into every <span data-demo-name suppressHydrationWarning>{demo.name}</span> residential master plan in <span data-demo-city suppressHydrationWarning>{demo.city}</span>.
         </p>
       </div>
 
